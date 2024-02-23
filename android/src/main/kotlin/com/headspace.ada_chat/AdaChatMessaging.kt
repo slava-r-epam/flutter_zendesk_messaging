@@ -1,18 +1,14 @@
 import android.content.Intent
-import com.chyiiiiiiiiiiiiii.zendesk_messaging.ZendeskMessagingPlugin
+import com.headspace.ada_chat.ZendeskMessagingPlugin
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import zendesk.android.Zendesk
-import zendesk.android.ZendeskResult
-import zendesk.android.ZendeskUser
-import zendesk.messaging.android.DefaultMessagingFactory
 
 
-class ZendeskMessaging(private val plugin: ZendeskMessagingPlugin, private val channel: MethodChannel) {
+class AdaChatMessaging(private val plugin: ZendeskMessagingPlugin, private val channel: MethodChannel) {
     companion object {
-        const val tag = "[ZendeskMessaging]"
+        const val tag = "[AdaChat]"
 
         // Method channel callback keys
         const val initializeSuccess: String = "initialize_success"

@@ -1,4 +1,4 @@
-name: zendesk_messaging_example
+name: ada_chat_example
 description: Demonstrates how to use the zendesk_messaging plugin.
 
 # The following line prevents the package from being accidentally published to
@@ -19,7 +19,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  zendesk_messaging:
+  ada_chat_flutter:
     # When depending on this package from a real application you should use:
     #   zendesk_messaging: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints

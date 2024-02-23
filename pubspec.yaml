@@ -1,7 +1,6 @@
-name: zendesk_messaging
-description: Zendesk-Messaging for Flutter developer
-version: 2.7.4
-homepage: https://github.com/chyiiiiiiiiiiii/flutter_zendesk_messaging
+name: ada_chat_flutter
+description: Ada chat flutter wrapper
+version: 0.0.1
 
 environment:
   sdk: '>=2.19.0 <3.0.0'
@@ -28,10 +27,11 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.chyiiiiiiiiiiiiii.zendesk_messaging
-        pluginClass: ZendeskMessagingPlugin
-      ios:
-        pluginClass: ZendeskMessagingPlugin
+        package: com.headspace.ada_chat
+        pluginClass: AdaChatPlugin
+        # todo AdaChatPlugin
+#      ios:
+#        pluginClass: AdaChatPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

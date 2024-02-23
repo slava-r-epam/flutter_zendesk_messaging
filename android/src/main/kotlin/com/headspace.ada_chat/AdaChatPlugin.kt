@@ -1,6 +1,6 @@
-package com.chyiiiiiiiiiiiiii.zendesk_messaging
+package com.headspace.ada_chat
 
-import ZendeskMessaging
+import AdaChatMessaging
 import android.app.Activity
 import androidx.annotation.NonNull
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -10,12 +10,12 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 /** ZendeskMessagingPlugin */
-class ZendeskMessagingPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
+class AdaChatPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
-    private val tag = "[ZendeskMessagingPlugin]"
+    private val tag = "[AdaChatMessagingPlugin]"
     private lateinit var channel: MethodChannel
     var activity: Activity? = null
     var isInitialized: Boolean = false

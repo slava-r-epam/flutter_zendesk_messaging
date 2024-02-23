@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zendesk_messaging/zendesk_messaging.dart';
+import 'package:zendesk_messaging/ada_chat_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,7 +64,8 @@ class _MyAppState extends State<MyApp> {
                   ),
                   ElevatedButton(
                     onPressed: () => _getUnreadMessageCount(),
-                    child: Text('Get unread message count - $unreadMessageCount'),
+                    child:
+                        Text('Get unread message count - $unreadMessageCount'),
                   ),
                 ],
                 ElevatedButton(
