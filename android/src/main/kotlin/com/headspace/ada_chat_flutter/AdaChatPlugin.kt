@@ -112,7 +112,7 @@ class AdaChatPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "zendesk_messaging")
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "ada_chat_flutter")
         channel.setMethodCallHandler(this)
     }
 
