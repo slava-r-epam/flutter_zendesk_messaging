@@ -1,5 +1,5 @@
+import 'package:ada_chat_flutter/ada_chat_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:zendesk_messaging/ada_chat_flutter.dart';
 
 void main() {
   runApp(const MyApp());
