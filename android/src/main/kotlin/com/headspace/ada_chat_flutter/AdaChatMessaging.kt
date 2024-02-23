@@ -1,6 +1,6 @@
+import com.headspace.ada_chat_flutter.AdaChatPlugin
 import io.flutter.plugin.common.MethodChannel
 import support.ada.embed.widget.AdaEmbedView
-
 
 class AdaChatMessaging(private val plugin: AdaChatPlugin, private val channel: MethodChannel) {
     fun show(

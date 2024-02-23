@@ -1,3 +1,5 @@
+package com.headspace.ada_chat_flutter
+
 import AdaChatMessaging
 import android.app.Activity
 import io.flutter.embedding.engine.plugins.FlutterPlugin

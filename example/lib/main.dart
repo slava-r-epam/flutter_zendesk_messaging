@@ -13,29 +13,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static const String androidChannelKey = "your android key";
-  static const String iosChannelKey = "your iOS key";
-
-  final List<String> channelMessages = [];
-
-  bool isLogin = false;
-  int unreadMessageCount = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    // Optional, observe all incoming messages
-    ZendeskMessaging.setMessageHandler((type, arguments) {
-      setState(() {
-        channelMessages.add("$type - args=$arguments");
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    final message = channelMessages.join("\n");
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -46,35 +25,12 @@ class _MyAppState extends State<MyApp> {
             padding: const EdgeInsets.all(20),
             child: ListView(
               children: [
-                Text(message),
                 const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
-                  onPressed: () => ZendeskMessaging.initialize(
-                    androidChannelKey: androidChannelKey,
-                    iosChannelKey: iosChannelKey,
-                  ),
+                  onPressed: () => AdaChat.show(handle: 'handle'),
                   child: const Text("Initialize"),
-                ),
-                if (isLogin) ...[
-                  ElevatedButton(
-                    onPressed: () => ZendeskMessaging.show(),
-                    child: const Text("Show messaging"),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _getUnreadMessageCount(),
-                    child:
-                        Text('Get unread message count - $unreadMessageCount'),
-                  ),
-                ],
-                ElevatedButton(
-                  onPressed: () => _login(),
-                  child: const Text("Login"),
-                ),
-                ElevatedButton(
-                  onPressed: () => _logout(),
-                  child: const Text("Logout"),
                 ),
               ],
             ),
@@ -82,35 +38,5 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
-  }
-
-  void _login() {
-    // You can attach local observer when calling some methods to be notified when ready
-    ZendeskMessaging.loginUserCallbacks(
-      jwt: "my_jwt",
-      onSuccess: (id, externalId) => setState(() {
-        channelMessages.add("Login observer - SUCCESS: $id, $externalId");
-        isLogin = true;
-      }),
-      onFailure: () => setState(() {
-        channelMessages.add("Login observer - FAILURE!");
-        isLogin = false;
-      }),
-    );
-  }
-
-  void _logout() {
-    ZendeskMessaging.logoutUser();
-    setState(() {
-      isLogin = false;
-    });
-  }
-
-  void _getUnreadMessageCount() async {
-    final messageCount = await ZendeskMessaging.getUnreadMessageCount();
-    if (mounted) {
-      unreadMessageCount = messageCount;
-      setState(() {});
-    }
   }
 }
