@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class AdaChat {
-  static const MethodChannel _channel = MethodChannel('ada_chat');
+  static const MethodChannel _channel = MethodChannel('ada_chat_flutter');
 
   static Future<void> show({
     required String handle,

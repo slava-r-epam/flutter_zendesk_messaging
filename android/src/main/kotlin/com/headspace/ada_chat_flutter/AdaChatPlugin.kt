@@ -21,6 +21,8 @@ class AdaChatPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         val sendData: Any? = call.arguments
         val adaChatMessaging = AdaChatMessaging(this, channel)
 
+        println("AdaChatPlugin:onMethodCall: call=$call, method=${call.method}, arguments=${call.arguments}")
+
         when (call.method) {
             "show" -> {
                 val handle = call.argument<String>("handle")!!
