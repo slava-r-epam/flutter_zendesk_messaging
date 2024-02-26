@@ -1,6 +1,11 @@
+import android.app.Activity
+import android.os.Bundle
+import androidx.fragment.app.FragmentActivity
 import com.headspace.ada_chat_flutter.AdaChatPlugin
 import io.flutter.plugin.common.MethodChannel
+import support.ada.embed.ui.AdaEmbedDialog
 import support.ada.embed.widget.AdaEmbedView
+
 
 class AdaChatService(private val plugin: AdaChatPlugin, private val channel: MethodChannel) {
     fun show(
@@ -16,8 +21,9 @@ class AdaChatService(private val plugin: AdaChatPlugin, private val channel: Met
         println("AdaChatService:show: handle=$handle, cluster=$cluster, greetings=$greetings, " +
                 "deviceToken=$deviceToken, language=$language, loadTimeoutMillis=$loadTimeoutMillis, " +
                 "styles=$styles, acceptThirdPartyCookies=$acceptThirdPartyCookies")
-        println("AdaChatService:show: activity=${plugin.activity}");
-        val adaView = AdaEmbedView(plugin.activity!!)
+
+        val activity = plugin.activity!!;
+        println("AdaChatService:show: activity=$activity");
 
         val adaSettingsBuilder = AdaEmbedView.Settings.Builder(handle)
         if (cluster != null) {
@@ -49,7 +55,24 @@ class AdaChatService(private val plugin: AdaChatPlugin, private val channel: Met
 //        }
 
         val adaSettings = adaSettingsBuilder.build()
-        adaView.initialize(adaSettings)
+
+//        val adaView = AdaEmbedView(activity)
+//        adaView.initialize(adaSettings)
+
+        val dialog = AdaEmbedDialog()
+        dialog.arguments = Bundle().apply {
+            putParcelable(AdaEmbedDialog.ARGUMENT_SETTINGS, adaSettings)
+        }
+
+        dialog.show((activity as FragmentActivity).supportFragmentManager, AdaEmbedDialog.TAG)
+
+//        val context = activity.applicationContext;
+//
+//        val intent = Intent(context, AdaEmbedActivity::class.java)
+//        intent.putExtra(AdaEmbedActivity.EXTRA_SETTINGS, adaSettings)
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//        context.startActivity(intent)
+
     }
 
 //    fun initialize(channelKey: String) {
