@@ -41,11 +41,11 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 20
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "io.github.adasupport:android-sdk-appcompat:1.8.6"
+    implementation "io.github.adasupport:android-sdk-appcompat-legacy:1.8.6"
 }

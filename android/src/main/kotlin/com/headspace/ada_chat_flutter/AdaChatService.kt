@@ -1,9 +1,11 @@
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.headspace.ada_chat_flutter.AdaChatPlugin
 import io.flutter.plugin.common.MethodChannel
-import support.ada.embed.ui.AdaEmbedDialog
+import support.ada.embed.ui.legacy.AdaEmbedActivity
+import support.ada.embed.ui.legacy.AdaEmbedDialog
 import support.ada.embed.widget.AdaEmbedView
 
 
@@ -59,19 +61,18 @@ class AdaChatService(private val plugin: AdaChatPlugin, private val channel: Met
 //        val adaView = AdaEmbedView(activity)
 //        adaView.initialize(adaSettings)
 
-        val dialog = AdaEmbedDialog()
-        dialog.arguments = Bundle().apply {
-            putParcelable(AdaEmbedDialog.ARGUMENT_SETTINGS, adaSettings)
-        }
-
-        dialog.show((activity as FragmentActivity).supportFragmentManager, AdaEmbedDialog.TAG)
-
-//        val context = activity.applicationContext;
+//        val dialog = AdaEmbedDialog()
+//        dialog.arguments = Bundle().apply {
+//            putParcelable(AdaEmbedDialog.ARGUMENT_SETTINGS, adaSettings)
+//        }
 //
-//        val intent = Intent(context, AdaEmbedActivity::class.java)
-//        intent.putExtra(AdaEmbedActivity.EXTRA_SETTINGS, adaSettings)
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//        context.startActivity(intent)
+//        dialog.show((activity as FragmentActivity).supportFragmentManager, AdaEmbedDialog.TAG)
+
+        val context = activity.applicationContext;
+        val intent = Intent(context, AdaEmbedActivity::class.java)
+        intent.putExtra(AdaEmbedActivity.EXTRA_SETTINGS, adaSettings)
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
 
     }
 
