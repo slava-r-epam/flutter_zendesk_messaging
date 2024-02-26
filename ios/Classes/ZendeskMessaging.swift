@@ -1,33 +1,36 @@
 import UIKit
 import AdaEmbedFramework
+import Flutter
 
 public class ZendeskMessaging: NSObject {
-    private static var initializeSuccess: String = "initialize_success"
-    private static var initializeFailure: String = "initialize_failure"
-    private static var loginSuccess: String = "login_success"
-    private static var loginFailure: String = "login_failure"
-    private static var logoutSuccess: String = "logout_success"
-    private static var logoutFailure: String = "logout_failure"
+//     private static var initializeSuccess: String = "initialize_success"
+//     private static var initializeFailure: String = "initialize_failure"
+//     private static var loginSuccess: String = "login_success"
+//     private static var loginFailure: String = "login_failure"
+//     private static var logoutSuccess: String = "logout_success"
+//     private static var logoutFailure: String = "logout_failure"
     
-    let TAG = "[ZendeskMessaging]"
+//     let TAG = "[ZendeskMessaging]"
     
-    private var zendeskPlugin: SwiftZendeskMessagingPlugin? = nil
-    private var channel: FlutterMethodChannel? = nil
+    private var zendeskPlugin: AdaChatFlutterPlugin? = nil
+//     private var channel: FlutterMethodChannel? = nil
 
-    init(flutterPlugin: SwiftZendeskMessagingPlugin, channel: FlutterMethodChannel) {
+    init(flutterPlugin: AdaChatFlutterPlugin
+//     , channel: FlutterMethodChannel
+    ) {
         self.zendeskPlugin = flutterPlugin
-        self.channel = channel
+//         self.channel = channel
     }
 
     func show(rootViewController: UIViewController?) {
 //             guard let messagingViewController = Zendesk.instance?.messaging?.messagingViewController() else { return }
 //             guard let rootViewController = rootViewController else { return }
 //             rootViewController.present(messagingViewController, animated: true, completion: nil)
-            print("\(self.TAG) - show")
+            print("ZendeskMessaging:show")
         }
 
     func initialize(channelKey: String) {
-        print("\(self.TAG) - Channel Key - \(channelKey)\n")
+        print("ZendeskMessaging:initialize - Channel Key - \(channelKey)\n")
 //         Zendesk.initialize(withChannelKey: channelKey, messagingFactory: DefaultMessagingFactory()) { result in
 //             if case let .failure(error) = result {
 //                 self.zendeskPlugin?.isInitialized = false

@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
-  ada_chat_flutter: 996351c2ba763f5c5df1dfa62bc1e0a037694499
+  ada_chat_flutter: ef3224d0d4e11a9c77cf598569f18b1c1f14544d
   AdaEmbedFramework: 42de317a5ea258a649492bc42ff81bec53a7405e
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
 
