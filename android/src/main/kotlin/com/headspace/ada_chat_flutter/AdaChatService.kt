@@ -20,27 +20,27 @@ class AdaChatService(private val plugin: AdaChatPlugin, private val channel: Met
         val adaView = AdaEmbedView(plugin.activity!!)
 
         val adaSettingsBuilder = AdaEmbedView.Settings.Builder(handle)
-//        if (cluster != null) {
-//            adaSettingsBuilder.cluster(cluster)
-//        }
-//        if (greetings != null) {
-//            adaSettingsBuilder.greetings(greetings)
-//        }
-//        if (deviceToken != null) {
-//            adaSettingsBuilder.deviceToken(deviceToken)
-//        }
-//        if (language != null) {
-//            adaSettingsBuilder.language(language)
-//        }
-//        if (loadTimeoutMillis != null) {
-//            adaSettingsBuilder.loadTimeoutMillis(loadTimeoutMillis)
-//        }
-//        if (styles != null) {
-//            adaSettingsBuilder.styles(styles)
-//        }
-//        if (acceptThirdPartyCookies != null) {
-//            adaSettingsBuilder.acceptThirdPartyCookies(acceptThirdPartyCookies)
-//        }
+        if (cluster != null) {
+            adaSettingsBuilder.cluster(cluster)
+        }
+        if (greetings != null) {
+            adaSettingsBuilder.greetings(greetings)
+        }
+        if (deviceToken != null) {
+            adaSettingsBuilder.deviceToken(deviceToken)
+        }
+        if (language != null) {
+            adaSettingsBuilder.language(language)
+        }
+        if (loadTimeoutMillis != null) {
+            adaSettingsBuilder.loadTimeoutMillis(loadTimeoutMillis)
+        }
+        if (styles != null) {
+            adaSettingsBuilder.styles(styles)
+        }
+        if (acceptThirdPartyCookies != null) {
+            adaSettingsBuilder.acceptThirdPartyCookies(acceptThirdPartyCookies)
+        }
 //        if (metaFields != null) { // todo metaFields
 //            adaSettingsBuilder.metaFields(metaFields)
 //        }
