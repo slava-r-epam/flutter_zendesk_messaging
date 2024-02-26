@@ -2,7 +2,7 @@ import com.headspace.ada_chat_flutter.AdaChatPlugin
 import io.flutter.plugin.common.MethodChannel
 import support.ada.embed.widget.AdaEmbedView
 
-class AdaChatMessaging(private val plugin: AdaChatPlugin, private val channel: MethodChannel) {
+class AdaChatService(private val plugin: AdaChatPlugin, private val channel: MethodChannel) {
     fun show(
             handle: String,
             cluster: String?,
@@ -13,38 +13,40 @@ class AdaChatMessaging(private val plugin: AdaChatPlugin, private val channel: M
             styles: String?,
             acceptThirdPartyCookies: Boolean?,
     ) {
-        println("AdaChat:show: handle=$handle")
+        println("AdaChatService:show: handle=$handle, cluster=$cluster, greetings=$greetings, " +
+                "deviceToken=$deviceToken, language=$language, loadTimeoutMillis=$loadTimeoutMillis, " +
+                "styles=$styles, acceptThirdPartyCookies=$acceptThirdPartyCookies")
+        println("AdaChatService:show: activity=${plugin.activity}");
         val adaView = AdaEmbedView(plugin.activity!!)
 
         val adaSettingsBuilder = AdaEmbedView.Settings.Builder(handle)
-        if (cluster != null) {
-            adaSettingsBuilder.cluster(cluster)
-        }
-        if (greetings != null) {
-            adaSettingsBuilder.greetings(greetings)
-        }
-        if (deviceToken != null) {
-            adaSettingsBuilder.deviceToken(deviceToken)
-        }
-        if (language != null) {
-            adaSettingsBuilder.language(language)
-        }
-        if (loadTimeoutMillis != null) {
-            adaSettingsBuilder.loadTimeoutMillis(loadTimeoutMillis)
-        }
-        if (styles != null) {
-            adaSettingsBuilder.styles(styles)
-        }
-        if (acceptThirdPartyCookies != null) {
-            adaSettingsBuilder.acceptThirdPartyCookies(acceptThirdPartyCookies)
-        }
+//        if (cluster != null) {
+//            adaSettingsBuilder.cluster(cluster)
+//        }
+//        if (greetings != null) {
+//            adaSettingsBuilder.greetings(greetings)
+//        }
+//        if (deviceToken != null) {
+//            adaSettingsBuilder.deviceToken(deviceToken)
+//        }
+//        if (language != null) {
+//            adaSettingsBuilder.language(language)
+//        }
+//        if (loadTimeoutMillis != null) {
+//            adaSettingsBuilder.loadTimeoutMillis(loadTimeoutMillis)
+//        }
+//        if (styles != null) {
+//            adaSettingsBuilder.styles(styles)
+//        }
+//        if (acceptThirdPartyCookies != null) {
+//            adaSettingsBuilder.acceptThirdPartyCookies(acceptThirdPartyCookies)
+//        }
 //        if (metaFields != null) { // todo metaFields
 //            adaSettingsBuilder.metaFields(metaFields)
 //        }
 //        if (sensitiveMetaFields != null) { // todo sensitiveMetaFields
 //            adaSettingsBuilder.sensitiveMetaFields(sensitiveMetaFields)
 //        }
-
 
         val adaSettings = adaSettingsBuilder.build()
         adaView.initialize(adaSettings)

@@ -1,6 +1,6 @@
 package com.headspace.ada_chat_flutter
 
-import AdaChatMessaging
+import AdaChatService
 import android.app.Activity
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -19,7 +19,7 @@ class AdaChatPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         val sendData: Any? = call.arguments
-        val adaChatMessaging = AdaChatMessaging(this, channel)
+        val adaChatMessaging = AdaChatService(this, channel)
 
         println("AdaChatPlugin:onMethodCall: call=$call, method=${call.method}, arguments=${call.arguments}")
 
