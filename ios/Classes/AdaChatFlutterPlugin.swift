@@ -6,14 +6,16 @@ public class AdaChatFlutterPlugin: NSObject, FlutterPlugin {
     let channel = FlutterMethodChannel(name: "ada_chat_flutter", binaryMessenger: registrar.messenger())
     let instance = AdaChatFlutterPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
+
+    print("AdaChatFlutterPlugin:register: registrar=\(registrar)")
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     let method = call.method
     let arguments = call.arguments as? Dictionary<String, Any>
-    let zendeskMessaging = ZendeskMessaging(flutterPlugin: self
-//     , channel: channel
-    )
+    let zendeskMessaging = ZendeskMessaging(flutterPlugin: self)
+
+    print("AdaChatFlutterPlugin:handle: call=\(call), method=\(method), arguments=\(arguments)")
 
     switch(method){
       case "show":

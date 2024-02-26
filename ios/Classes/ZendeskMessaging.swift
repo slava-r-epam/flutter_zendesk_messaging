@@ -15,10 +15,9 @@ public class ZendeskMessaging: NSObject {
     private var zendeskPlugin: AdaChatFlutterPlugin? = nil
 //     private var channel: FlutterMethodChannel? = nil
 
-    init(flutterPlugin: AdaChatFlutterPlugin
-//     , channel: FlutterMethodChannel
-    ) {
-        self.zendeskPlugin = flutterPlugin
+    init(flutterPlugin: AdaChatFlutterPlugin) {
+      print("ZendeskMessaging:init")
+      self.zendeskPlugin = flutterPlugin
 //         self.channel = channel
     }
 
@@ -29,8 +28,8 @@ public class ZendeskMessaging: NSObject {
             print("ZendeskMessaging:show")
         }
 
-    func initialize(channelKey: String) {
-        print("ZendeskMessaging:initialize - Channel Key - \(channelKey)\n")
+//     func initialize(channelKey: String) {
+//         print("ZendeskMessaging:initialize - Channel Key - \(channelKey)\n")
 //         Zendesk.initialize(withChannelKey: channelKey, messagingFactory: DefaultMessagingFactory()) { result in
 //             if case let .failure(error) = result {
 //                 self.zendeskPlugin?.isInitialized = false
@@ -42,7 +41,7 @@ public class ZendeskMessaging: NSObject {
 //                 self.channel?.invokeMethod(ZendeskMessaging.initializeSuccess, arguments: [:])
 //             }
 //         }
-    }
+//     }
 
 //     func show(rootViewController: UIViewController?) {
 //         guard let messagingViewController = Zendesk.instance?.messaging?.messagingViewController() else { return }
