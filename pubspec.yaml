@@ -29,9 +29,8 @@ flutter:
       android:
         package: com.headspace.ada_chat_flutter
         pluginClass: AdaChatPlugin
-        # todo AdaChatPlugin
-#      ios:
-#        pluginClass: AdaChatPlugin
+      ios:
+        pluginClass: ZendeskMessaging
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

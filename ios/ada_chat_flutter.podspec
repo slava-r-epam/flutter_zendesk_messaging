@@ -3,20 +3,18 @@
 # Run `pod lib lint zendesk_messaging.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'zendesk_messaging'
+  s.name             = 'ada_chat_flutter'
   s.version          = '0.0.1'
   s.summary          = 'Ada chat flutter plugin'
-  s.description      = <<-DESC
-A new flutter plugin project.
-                       DESC
+  s.description      = 'A new flutter plugin project'
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'help@headspace.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'ZendeskSDKMessaging', '2.9.0'
-  s.platform = :ios, '13.0'
+  s.dependency 'AdaEmbedFramework', '1.8.0'
+  s.platform = :ios, '10.0'
 
   # Flutter.framework does not contain a i386 slice.
   s.cocoapods_version = '>= 1.10.0'

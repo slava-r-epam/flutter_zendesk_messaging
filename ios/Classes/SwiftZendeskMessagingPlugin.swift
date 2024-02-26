@@ -11,7 +11,7 @@ public class SwiftZendeskMessagingPlugin: NSObject, FlutterPlugin {
     }
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "zendesk_messaging", binaryMessenger: registrar.messenger())
+        let channel = FlutterMethodChannel(name: "ada_chat_flutter", binaryMessenger: registrar.messenger())
         let instance = SwiftZendeskMessagingPlugin(channel: channel)
         registrar.addMethodCallDelegate(instance, channel: channel)
         registrar.addApplicationDelegate(instance)
@@ -24,43 +24,47 @@ public class SwiftZendeskMessagingPlugin: NSObject, FlutterPlugin {
 
         // chat sdk method channels
         switch(method){
-            case "initialize":
-                if (isInitialized) {
-                    print("\(TAG) - Messaging is already initialize!\n")
-                    return
-                }
-                let channelKey: String = (arguments?["channelKey"] ?? "") as! String
-                zendeskMessaging.initialize(channelKey: channelKey)
-                break;
             case "show":
-                if (!isInitialized) {
-                    print("\(TAG) - Messaging needs to be initialized first.\n")
-                }
+                print("\(TAG):show: OK.\n")
                 zendeskMessaging.show(rootViewController: UIApplication.shared.delegate?.window??.rootViewController)
                 break
-            case "loginUser":
-                if (!isInitialized) {
-                    print("\(TAG) - Messaging needs to be initialized first.\n")
-                }
-                let jwt: String = arguments?["jwt"] as! String
-                zendeskMessaging.loginUser(jwt: jwt)
-                break
-            case "logoutUser":
-                if (!isInitialized) {
-                    print("\(TAG) - Messaging needs to be initialized first.\n")
-                }
-                zendeskMessaging.logoutUser()
-                break
-            case "getUnreadMessageCount":
-                if (!isInitialized) {
-                    print("\(TAG) - Messaging needs to be initialized first.\n")
-                }
-                result(handleMessageCount())
-                break
-            
-            case "isInitialized":
-                result(handleInitializedStatus())
-                break
+//             case "initialize":
+//                 if (isInitialized) {
+//                     print("\(TAG) - Messaging is already initialize!\n")
+//                     return
+//                 }
+//                 let channelKey: String = (arguments?["channelKey"] ?? "") as! String
+//                 zendeskMessaging.initialize(channelKey: channelKey)
+//                 break;
+//             case "show":
+//                 if (!isInitialized) {
+//                     print("\(TAG) - Messaging needs to be initialized first.\n")
+//                 }
+//                 zendeskMessaging.show(rootViewController: UIApplication.shared.delegate?.window??.rootViewController)
+//                 break
+//             case "loginUser":
+//                 if (!isInitialized) {
+//                     print("\(TAG) - Messaging needs to be initialized first.\n")
+//                 }
+//                 let jwt: String = arguments?["jwt"] as! String
+//                 zendeskMessaging.loginUser(jwt: jwt)
+//                 break
+//             case "logoutUser":
+//                 if (!isInitialized) {
+//                     print("\(TAG) - Messaging needs to be initialized first.\n")
+//                 }
+//                 zendeskMessaging.logoutUser()
+//                 break
+//             case "getUnreadMessageCount":
+//                 if (!isInitialized) {
+//                     print("\(TAG) - Messaging needs to be initialized first.\n")
+//                 }
+//                 result(handleMessageCount())
+//                 break
+//
+//             case "isInitialized":
+//                 result(handleInitializedStatus())
+//                 break
             default:
                 break
         }
@@ -68,12 +72,12 @@ public class SwiftZendeskMessagingPlugin: NSObject, FlutterPlugin {
         result(nil)
     }
 
-    private func handleMessageCount() ->Int{
-         let zendeskMessaging = ZendeskMessaging(flutterPlugin: self, channel: channel)
-
-        return zendeskMessaging.getUnreadMessageCount()
-    }
-    private func handleInitializedStatus() ->Bool{
-        return isInitialized
-    }
+//     private func handleMessageCount() ->Int{
+//          let zendeskMessaging = ZendeskMessaging(flutterPlugin: self, channel: channel)
+//
+//         return zendeskMessaging.getUnreadMessageCount()
+//     }
+//     private func handleInitializedStatus() ->Bool{
+//         return isInitialized
+//     }
 }
