@@ -2,23 +2,14 @@ import UIKit
 import AdaEmbedFramework
 import Flutter
 
-public class ZendeskMessaging: NSObject {
-//     private static var initializeSuccess: String = "initialize_success"
-//     private static var initializeFailure: String = "initialize_failure"
-//     private static var loginSuccess: String = "login_success"
-//     private static var loginFailure: String = "login_failure"
-//     private static var logoutSuccess: String = "logout_success"
-//     private static var logoutFailure: String = "logout_failure"
-    
-//     let TAG = "[ZendeskMessaging]"
-    
-    private var zendeskPlugin: AdaChatFlutterPlugin? = nil
-//     private var channel: FlutterMethodChannel? = nil
+public class AdaChatService: NSObject {
+    private var adaChatPlugin: AdaChatPlugin? = nil
+    private var channel: FlutterMethodChannel? = nil
 
-    init(flutterPlugin: AdaChatFlutterPlugin) {
-      debugPrint("ZendeskMessaging:init")
-      self.zendeskPlugin = flutterPlugin
-//         self.channel = channel
+    init(flutterPlugin: AdaChatPlugin, channel: FlutterMethodChannel) {
+      debugPrint("AdaChatService:init")
+      self.adaChatPlugin = flutterPlugin
+     self.channel = channel
     }
 
     func show(rootViewController: UIViewController?, 
@@ -40,7 +31,7 @@ public class ZendeskMessaging: NSObject {
               navigationBarOpaqueBackground: Bool? = nil
               
     ) {
-        debugPrint("ZendeskMessaging:show: rootViewController=\(String(describing: rootViewController)), handle=\(String(describing: handle)), cluster=\(String(describing: cluster)), language=\(String(describing: language)), domain=\(String(describing: domain)), styles=\(String(describing: styles)), greeting=\(String(describing: greeting)), openWebLinksInSafari=\(String(describing: openWebLinksInSafari)), appScheme=\(String(describing: appScheme)), webViewTimeout=\(String(describing: webViewTimeout)), deviceToken=\(String(describing: deviceToken)), navigationBarOpaqueBackground=\(String(describing: navigationBarOpaqueBackground))")
+        debugPrint("AdaChatService:show: rootViewController=\(String(describing: rootViewController)), handle=\(String(describing: handle)), cluster=\(String(describing: cluster)), language=\(String(describing: language)), domain=\(String(describing: domain)), styles=\(String(describing: styles)), greeting=\(String(describing: greeting)), openWebLinksInSafari=\(String(describing: openWebLinksInSafari)), appScheme=\(String(describing: appScheme)), webViewTimeout=\(String(describing: webViewTimeout)), deviceToken=\(String(describing: deviceToken)), navigationBarOpaqueBackground=\(String(describing: navigationBarOpaqueBackground))")
         
         lazy var adaFramework = AdaWebHost(handle: handle)
         if cluster != nil {
@@ -78,7 +69,8 @@ public class ZendeskMessaging: NSObject {
 //        adaFramework.launchInjectingWebSupport(into: rootViewController!.view)
         
 //        2 - Not working
-//        guard let navigationController = rootViewController?.navigationController else { return }
+//        let navigationController = UINavigationController(rootViewController: rootViewController!)
+////        guard let navigationController = rootViewController?.navigationController else { return }
 //        adaFramework.launchNavWebSupport(from: navigationController)
         
 //        3 - Working

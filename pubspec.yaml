@@ -31,7 +31,7 @@ flutter:
         package: com.headspace.ada_chat_flutter
         pluginClass: AdaChatPlugin
       ios:
-        pluginClass: AdaChatFlutterPlugin
+        pluginClass: AdaChatPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
