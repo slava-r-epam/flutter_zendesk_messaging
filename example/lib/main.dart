@@ -29,13 +29,16 @@ class _MyAppState extends State<MyApp> {
                   height: 20,
                 ),
                 ElevatedButton(
-                  onPressed: () => AdaChat.show(
-                    handle: 'headspace',
-                    acceptThirdPartyCookies: true,
-                    greetings: 'Hello world',
-                    language: 'en',
-                    loadTimeoutMillis: 3000,
-                  ),
+                  onPressed: () {
+                    debugPrint('MyApp:onPressed');
+                    AdaChat.show(
+                      handle: 'headspace',
+                      // acceptThirdPartyCookies: true,
+                      // greetings: 'Hello world',
+                      // language: 'en',
+                      // loadTimeoutMillis: 3000,
+                    );
+                  },
                   child: const Text("Show chat"),
                 ),
               ],

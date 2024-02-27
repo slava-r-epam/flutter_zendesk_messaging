@@ -25,12 +25,12 @@
 //         // chat sdk method channels
 //         switch(method){
 //             case "show":
-//                 print("\(TAG):show: OK.\n")
+//                 debugPrint("\(TAG):show: OK.\n")
 //                 zendeskMessaging.show(rootViewController: UIApplication.shared.delegate?.window??.rootViewController)
 //                 break
 // //             case "initialize":
 // //                 if (isInitialized) {
-// //                     print("\(TAG) - Messaging is already initialize!\n")
+// //                     debugPrint("\(TAG) - Messaging is already initialize!\n")
 // //                     return
 // //                 }
 // //                 let channelKey: String = (arguments?["channelKey"] ?? "") as! String
@@ -38,26 +38,26 @@
 // //                 break;
 // //             case "show":
 // //                 if (!isInitialized) {
-// //                     print("\(TAG) - Messaging needs to be initialized first.\n")
+// //                     debugPrint("\(TAG) - Messaging needs to be initialized first.\n")
 // //                 }
 // //                 zendeskMessaging.show(rootViewController: UIApplication.shared.delegate?.window??.rootViewController)
 // //                 break
 // //             case "loginUser":
 // //                 if (!isInitialized) {
-// //                     print("\(TAG) - Messaging needs to be initialized first.\n")
+// //                     debugPrint("\(TAG) - Messaging needs to be initialized first.\n")
 // //                 }
 // //                 let jwt: String = arguments?["jwt"] as! String
 // //                 zendeskMessaging.loginUser(jwt: jwt)
 // //                 break
 // //             case "logoutUser":
 // //                 if (!isInitialized) {
-// //                     print("\(TAG) - Messaging needs to be initialized first.\n")
+// //                     debugPrint("\(TAG) - Messaging needs to be initialized first.\n")
 // //                 }
 // //                 zendeskMessaging.logoutUser()
 // //                 break
 // //             case "getUnreadMessageCount":
 // //                 if (!isInitialized) {
-// //                     print("\(TAG) - Messaging needs to be initialized first.\n")
+// //                     debugPrint("\(TAG) - Messaging needs to be initialized first.\n")
 // //                 }
 // //                 result(handleMessageCount())
 // //                 break
