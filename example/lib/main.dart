@@ -25,13 +25,12 @@ class _MyAppState extends State<MyApp> {
             padding: const EdgeInsets.all(20),
             child: ListView(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    debugPrint('MyApp:onPressed');
-                    AdaChat.show(
+                    debugPrint('MyApp: AdaChat.initialize');
+
+                    AdaChat.initialize(
                       handle: 'headspace',
                       // cluster: 'ca',
                       greetings: 'Hello there',
@@ -54,6 +53,16 @@ class _MyAppState extends State<MyApp> {
                       navigationBarOpaqueBackground: true,
                       // domain: 'domain',
                     );
+                  },
+                  child: const Text("Init"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    debugPrint('MyApp: AdaChat.show');
+
+                    AdaChat.show(
+                        // mode: 'inject',
+                        );
                   },
                   child: const Text("Show chat"),
                 ),

@@ -8,14 +8,11 @@ public class AdaChatService: NSObject {
   private var adaFramework: AdaWebHost? = nil
   
   init(flutterPlugin: AdaChatPlugin, channel: FlutterMethodChannel) {
-    debugPrint("AdaChatService:init")
     self.adaChatPlugin = flutterPlugin
     self.channel = channel
   }
   
-  func show(rootViewController: UIViewController?,
-            handle: String,
-            mode: String? = nil,
+  func initialize(handle: String,
             cluster: String? = nil,
             language: String? = nil,
             domain: String? = nil,
@@ -28,9 +25,8 @@ public class AdaChatService: NSObject {
             webViewTimeout: Double? = nil,
             deviceToken: String? = nil,
             navigationBarOpaqueBackground: Bool? = nil) {
-    debugPrint("AdaChatService:show: rootViewController=\(String(describing: rootViewController)), handle=\(String(describing: handle)), mode=\(String(describing: mode)), cluster=\(String(describing: cluster)), language=\(String(describing: language)), domain=\(String(describing: domain)), styles=\(String(describing: styles)), greeting=\(String(describing: greeting)), metafields=\(String(describing: metafields)), sensitiveMetafields=\(String(describing: sensitiveMetafields)), openWebLinksInSafari=\(String(describing: openWebLinksInSafari)), appScheme=\(String(describing: appScheme)), webViewTimeout=\(String(describing: webViewTimeout)), deviceToken=\(String(describing: deviceToken)), navigationBarOpaqueBackground=\(String(describing: navigationBarOpaqueBackground))")
-    
-    channel?.invokeMethod("callback1", arguments: ["key1": "value1"])
+    debugPrint("AdaChatService:initialize: handle=\(String(describing: handle)), cluster=\(String(describing: cluster)), language=\(String(describing: language)), domain=\(String(describing: domain)), styles=\(String(describing: styles)), greeting=\(String(describing: greeting)), metafields=\(String(describing: metafields)), sensitiveMetafields=\(String(describing: sensitiveMetafields)), openWebLinksInSafari=\(String(describing: openWebLinksInSafari)), appScheme=\(String(describing: appScheme)), webViewTimeout=\(String(describing: webViewTimeout)), deviceToken=\(String(describing: deviceToken)), navigationBarOpaqueBackground=\(String(describing: navigationBarOpaqueBackground))")
+  
     
     let adaFramework = AdaWebHost(handle: handle)
     if cluster != nil {
@@ -110,9 +106,8 @@ public class AdaChatService: NSObject {
       
       adaFramework.setSensitiveMetaFields(builder: metafieldsBuilder)
     }
-    
     adaFramework.webViewLoadingErrorCallback = { (error) -> Void in
-      self.channel?.invokeMethod("onError", arguments: error)
+      self.channel?.invokeMethod("onError", arguments: error.localizedDescription)
     }
     adaFramework.eventCallbacks = ["*": { (event) -> Void in
       self.channel?.invokeMethod("onEvent", arguments: event)
@@ -120,24 +115,29 @@ public class AdaChatService: NSObject {
     
     //        public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
     //              zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
+
+    self.adaFramework = adaFramework
+  }
+  
+  func show(rootViewController: UIViewController?,
+            mode: String? = nil) {
+    debugPrint("AdaChatService:show: rootViewController=\(String(describing: rootViewController)), mode=\(String(describing: mode))")
     
     if mode == "inject" {
-      adaFramework.launchInjectingWebSupport(into: rootViewController!.view)
+      self.adaFramework!.launchInjectingWebSupport(into: rootViewController!.view)
     } else if mode == "navigation" {
       if rootViewController?.navigationController == nil {
         print("AdaChatService:show: navigationController=nil")
         return
       }
-      adaFramework.launchNavWebSupport(from: rootViewController!.navigationController!)
+      self.adaFramework!.launchNavWebSupport(from: rootViewController!.navigationController!)
     } else {
       if rootViewController == nil {
         print("AdaChatService:show: rootViewController=nil")
         return
       }
-      adaFramework.launchModalWebSupport(from: rootViewController!)
+      self.adaFramework!.launchModalWebSupport(from: rootViewController!)
     }
-    
-    self.adaFramework = adaFramework
   }
   
   func setLanguage(language: String) {

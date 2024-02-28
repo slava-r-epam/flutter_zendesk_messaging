@@ -21,7 +21,7 @@ class AdaChat {
     });
   }
 
-  static Future<void> show({
+  static Future<void> initialize({
     required String handle,
     String? cluster,
     String? greetings,
@@ -39,9 +39,6 @@ class AdaChat {
     /// Android only
     bool? acceptThirdPartyCookies,
 
-    /// iOS only, possible values are 'inject', 'navigation' and 'modal' (default).
-    String? mode,
-
     /// iOS only
     bool? openWebLinksInSafari,
 
@@ -55,7 +52,7 @@ class AdaChat {
     String? domain,
   }) async {
     try {
-      await _channel.invokeMethod('show', <String, dynamic>{
+      await _channel.invokeMethod('initialize', <String, dynamic>{
         'handle': handle,
         'cluster': cluster,
         'greetings': greetings,
@@ -68,14 +65,68 @@ class AdaChat {
             loadTimeoutMillis == null ? null : loadTimeoutMillis / 1000,
         'styles': styles,
         'acceptThirdPartyCookies': acceptThirdPartyCookies,
-        'mode': mode,
         'openWebLinksInSafari': openWebLinksInSafari,
         'appScheme': appScheme,
         'navigationBarOpaqueBackground': navigationBarOpaqueBackground,
         'domain': domain,
       });
     } catch (error) {
-      debugPrint('AdaChat:show: error=$error');
+      print('AdaChat:initialize: error=$error');
+    }
+  }
+
+  static Future<void> setLanguage({
+    required String language,
+  }) async {
+    try {
+      await _channel.invokeMethod(
+        'setLanguage',
+        <String, dynamic>{'language': language},
+      );
+    } catch (error) {
+      print('AdaChat:setLanguage: error=$error');
+    }
+  }
+
+  static Future<void> setMetaFields({
+    /// Object can be bool, int, double or String
+    required Map<String, Object> metafields,
+  }) async {
+    try {
+      await _channel.invokeMethod(
+        'setMetaFields',
+        <String, dynamic>{'metafields': metafields},
+      );
+    } catch (error) {
+      print('AdaChat:setMetaFields: error=$error');
+    }
+  }
+
+  static Future<void> setSensitiveMetaFields({
+    /// Object can be bool, int, double or String
+    required Map<String, Object> sensitiveMetafields,
+  }) async {
+    try {
+      await _channel.invokeMethod(
+        'setSensitiveMetaFields',
+        <String, dynamic>{'sensitiveMetafields': sensitiveMetafields},
+      );
+    } catch (error) {
+      print('AdaChat:setSensitiveMetaFields: error=$error');
+    }
+  }
+
+  static Future<void> show({
+    /// iOS only, possible values are 'inject', 'navigation' and 'modal' (default).
+    String? mode,
+  }) async {
+    try {
+      await _channel.invokeMethod(
+        'show',
+        <String, dynamic>{'mode': mode},
+      );
+    } catch (error) {
+      print('AdaChat:show: error=$error');
     }
   }
 
