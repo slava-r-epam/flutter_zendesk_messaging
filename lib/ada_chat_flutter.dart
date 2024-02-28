@@ -1,19 +1,58 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class AdaChat {
   static const MethodChannel _channel = MethodChannel('ada_chat_flutter');
 
+  AdaChat() {
+    _channel.setMethodCallHandler((call) async {
+      final method = call.method;
+
+      if (method == 'onEvent') {
+        debugPrint('AdaChat:onCallback:onEvent: arguments=${call.arguments}');
+      } else if (method == 'onError') {
+        debugPrint('AdaChat:onCallback:onError: arguments=${call.arguments}');
+      } else {
+        debugPrint('AdaChat:onCallback: method=$method, '
+            'arguments=${call.arguments}');
+      }
+    });
+  }
+
   static Future<void> show({
     required String handle,
     String? cluster,
     String? greetings,
+
+    /// Object can be bool, int, double or String
+    Map<String, Object>? metafields,
+
+    /// Object can be bool, int, double or String
+    Map<String, Object>? sensitiveMetafields,
     String? deviceToken,
     String? language,
     int? loadTimeoutMillis,
     String? styles,
+
+    /// Android only
     bool? acceptThirdPartyCookies,
+
+    /// iOS only, possible values are 'inject', 'navigation' and 'modal' (default).
+    String? mode,
+
+    /// iOS only
+    bool? openWebLinksInSafari,
+
+    /// iOS only
+    String? appScheme,
+
+    /// iOS only
+    bool? navigationBarOpaqueBackground,
+
+    /// iOS only
+    String? domain,
   }) async {
     try {
       await _channel.invokeMethod('show', <String, dynamic>{
@@ -21,13 +60,22 @@ class AdaChat {
         'cluster': cluster,
         'greetings': greetings,
         'deviceToken': deviceToken,
+        'metafields': metafields,
+        'sensitiveMetafields': sensitiveMetafields,
         'language': language,
         'loadTimeoutMillis': loadTimeoutMillis,
+        'webViewTimeout':
+            loadTimeoutMillis == null ? null : loadTimeoutMillis / 1000,
         'styles': styles,
         'acceptThirdPartyCookies': acceptThirdPartyCookies,
+        'mode': mode,
+        'openWebLinksInSafari': openWebLinksInSafari,
+        'appScheme': appScheme,
+        'navigationBarOpaqueBackground': navigationBarOpaqueBackground,
+        'domain': domain,
       });
     } catch (error) {
-      print('AdaChat:show: error=$error');
+      debugPrint('AdaChat:show: error=$error');
     }
   }
 

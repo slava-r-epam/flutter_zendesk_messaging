@@ -9,29 +9,27 @@ public class AdaChatService: NSObject {
     init(flutterPlugin: AdaChatPlugin, channel: FlutterMethodChannel) {
       debugPrint("AdaChatService:init")
       self.adaChatPlugin = flutterPlugin
-     self.channel = channel
+      self.channel = channel
     }
 
     func show(rootViewController: UIViewController?, 
               handle: String,
+              mode: String? = nil,
               cluster: String? = nil,
               language: String? = nil,
               domain: String? = nil,
               styles: String? = nil,
               greeting: String? = nil,
-//              metafields: [String: Any]? = nil,
-//              sensitiveMetafields: [String:Any] = nil,
+              metafields: [String: Any]? = nil,
+              sensitiveMetafields: [String:Any]? = nil,
               openWebLinksInSafari: Bool? = nil,
               appScheme: String? = nil,
-//              zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
-//              webViewLoadingErrorCallback: ((Error) -> Void)? = nil,
-//              eventCallbacks: [String: (_ event: [String: Any]) -> Void]? = nil,
               webViewTimeout: Double? = nil,
               deviceToken: String? = nil,
-              navigationBarOpaqueBackground: Bool? = nil
-              
-    ) {
-        debugPrint("AdaChatService:show: rootViewController=\(String(describing: rootViewController)), handle=\(String(describing: handle)), cluster=\(String(describing: cluster)), language=\(String(describing: language)), domain=\(String(describing: domain)), styles=\(String(describing: styles)), greeting=\(String(describing: greeting)), openWebLinksInSafari=\(String(describing: openWebLinksInSafari)), appScheme=\(String(describing: appScheme)), webViewTimeout=\(String(describing: webViewTimeout)), deviceToken=\(String(describing: deviceToken)), navigationBarOpaqueBackground=\(String(describing: navigationBarOpaqueBackground))")
+              navigationBarOpaqueBackground: Bool? = nil) {
+        debugPrint("AdaChatService:show: rootViewController=\(String(describing: rootViewController)), handle=\(String(describing: handle)), mode=\(String(describing: mode)), cluster=\(String(describing: cluster)), language=\(String(describing: language)), domain=\(String(describing: domain)), styles=\(String(describing: styles)), greeting=\(String(describing: greeting)), metafields=\(String(describing: metafields)), sensitiveMetafields=\(String(describing: sensitiveMetafields)), openWebLinksInSafari=\(String(describing: openWebLinksInSafari)), appScheme=\(String(describing: appScheme)), webViewTimeout=\(String(describing: webViewTimeout)), deviceToken=\(String(describing: deviceToken)), navigationBarOpaqueBackground=\(String(describing: navigationBarOpaqueBackground))")
+        
+        channel?.invokeMethod("callback1", arguments: ["key1": "value1"])
         
         lazy var adaFramework = AdaWebHost(handle: handle)
         if cluster != nil {
@@ -64,20 +62,71 @@ public class AdaChatService: NSObject {
         if navigationBarOpaqueBackground != nil {
             adaFramework.navigationBarOpaqueBackground = navigationBarOpaqueBackground!
         }
-        
-//        1 - Not working
-//        adaFramework.launchInjectingWebSupport(into: rootViewController!.view)
-        
-//        2 - Not working
-//        let navigationController = UINavigationController(rootViewController: rootViewController!)
-////        guard let navigationController = rootViewController?.navigationController else { return }
-//        adaFramework.launchNavWebSupport(from: navigationController)
-        
-//        3 - Working
-        if rootViewController == nil {
-            return
+        if deviceToken != nil {
+            adaFramework.deviceToken = deviceToken!
         }
-        adaFramework.launchModalWebSupport(from: rootViewController!)
+        if metafields != nil {
+            for pair in metafields! {
+                let val = pair.value
+                if val is String {
+                    adaFramework.setMetaFields(builder: MetaFields.Builder().setField(key: pair.key, value: val as! String))
+                } else if val is Bool {
+                    adaFramework.setMetaFields(builder: MetaFields.Builder().setField(key: pair.key, value: val as! Bool))
+                } else if val is Int {
+                    adaFramework.setMetaFields(builder: MetaFields.Builder().setField(key: pair.key, value: val as! Int))
+                } else if val is Float {
+                    adaFramework.setMetaFields(builder: MetaFields.Builder().setField(key: pair.key, value: val as! Float))
+                } else if val is Double {
+                    adaFramework.setMetaFields(builder: MetaFields.Builder().setField(key: pair.key, value: val as! Double))
+                } else {
+                    print("AdaChatService:show: incorrect metafield value=\(val) for key=\(pair.key)")
+                }
+            }
+        }
+        if sensitiveMetafields != nil {
+            for pair in sensitiveMetafields! {
+                let val = pair.value
+                if val is String {
+                    adaFramework.setSensitiveMetaFields(builder: MetaFields.Builder().setField(key: pair.key, value: val as! String))
+                } else if val is Bool {
+                    adaFramework.setSensitiveMetaFields(builder: MetaFields.Builder().setField(key: pair.key, value: val as! Bool))
+                } else if val is Int {
+                    adaFramework.setSensitiveMetaFields(builder: MetaFields.Builder().setField(key: pair.key, value: val as! Int))
+                } else if val is Float {
+                    adaFramework.setSensitiveMetaFields(builder: MetaFields.Builder().setField(key: pair.key, value: val as! Float))
+                } else if val is Double {
+                    adaFramework.setSensitiveMetaFields(builder: MetaFields.Builder().setField(key: pair.key, value: val as! Double))
+                } else {
+                    print("AdaChatService:show: incorrect sensitiveMetafield value=\(val) for key=\(pair.key)")
+                }
+            }
+        }
+        
+        adaFramework.webViewLoadingErrorCallback = { (error) -> Void in
+            self.channel?.invokeMethod("onError", arguments: error)
+        }
+        adaFramework.eventCallbacks = ["*": { (event) -> Void in
+            self.channel?.invokeMethod("onEvent", arguments: event)
+        }]
+    
+//        public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
+//              zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
+        
+        if mode == "inject" {
+            adaFramework.launchInjectingWebSupport(into: rootViewController!.view)
+        } else if mode == "navigation" {
+            if rootViewController?.navigationController == nil {
+                print("AdaChatService:show: navigationController=nil")
+                return
+            }
+            adaFramework.launchNavWebSupport(from: rootViewController!.navigationController!)
+        } else {
+            if rootViewController == nil {
+                print("AdaChatService:show: rootViewController=nil")
+                return
+            }
+            adaFramework.launchModalWebSupport(from: rootViewController!)
+        }
     }
 
 //     func initialize(channelKey: String) {
