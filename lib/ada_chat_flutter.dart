@@ -151,6 +151,14 @@ class AdaChat {
     }
   }
 
+  static Future<void> reset() async {
+    try {
+      await _channel.invokeMethod('reset');
+    } catch (error) {
+      log('AdaChat:reset: error=$error');
+    }
+  }
+
   static Future<void> show({
     /// iOS only, possible values are 'inject', 'navigation' and 'modal' (default).
     String? mode,

@@ -101,6 +101,14 @@ class _MyAppState extends State<MyApp> {
                   },
                   child: const Text("show"),
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    debugPrint('MyApp: AdaChat.reset');
+
+                    AdaChat.reset();
+                  },
+                  child: const Text("reset"),
+                ),
               ],
             ),
           ),

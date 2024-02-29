@@ -134,6 +134,15 @@ public class AdaChatPlugin: NSObject, FlutterPlugin {
       AdaChatPlugin.adaChatService!.triggerAnswer(answerId: answerId)
       break
       
+    case "reset":
+      if(AdaChatPlugin.adaChatService == nil) {
+        print("AdaChatPlugin:reset: adaChatService is not inited")
+        break
+      }
+      
+      AdaChatPlugin.adaChatService!.reset()
+      break
+      
     default:
       if(AdaChatPlugin.adaChatService == nil) {
         print("AdaChatPlugin:default: adaChatService is not inited")

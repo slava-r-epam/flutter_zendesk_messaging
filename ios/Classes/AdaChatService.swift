@@ -113,9 +113,6 @@ public class AdaChatService: NSObject {
       self.channel?.invokeMethod("onEvent", arguments: event)
     }]
     
-    //        public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
-    //              zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
-    
     self.adaFramework = adaFramework
   }
   
@@ -126,6 +123,7 @@ public class AdaChatService: NSObject {
     if mode == "inject" {
       self.adaFramework!.launchInjectingWebSupport(into: rootViewController!.view)
     } else if mode == "navigation" {
+      // fixme Not working
       if rootViewController?.navigationController == nil {
         print("AdaChatService:show: navigationController=nil")
         return
@@ -237,5 +235,15 @@ public class AdaChatService: NSObject {
     debugPrint("AdaChatService:triggerAnswer: answerId=\(String(describing: answerId))")
     
     self.adaFramework!.triggerAnswer(answerId: answerId)
+  }
+  
+  func reset() {
+    if self.adaFramework == nil {
+      print("AdaChatService:reset: adaFramework is not initialized")
+    }
+    
+    debugPrint("AdaChatService:reset")
+    
+    self.adaFramework!.reset()
   }
 }
