@@ -103,6 +103,37 @@ public class AdaChatPlugin: NSObject, FlutterPlugin {
       AdaChatPlugin.adaChatService!.setSensitiveMetaFields(metafields: metafields)
       break
       
+    case "deleteHistory":
+      if(AdaChatPlugin.adaChatService == nil) {
+        print("AdaChatPlugin:deleteHistory: adaChatService is not inited")
+        break
+      }
+      
+      AdaChatPlugin.adaChatService!.deleteHistory()
+      break
+      
+    case "setDeviceToken":
+      if(AdaChatPlugin.adaChatService == nil) {
+        print("AdaChatPlugin:setDeviceToken: adaChatService is not inited")
+        break
+      }
+      
+      let deviceToken = arguments?["deviceToken"] as! String
+      
+      AdaChatPlugin.adaChatService!.setDeviceToken(deviceToken: deviceToken)
+      break
+      
+    case "triggerAnswer":
+      if(AdaChatPlugin.adaChatService == nil) {
+        print("AdaChatPlugin:triggerAnswer: adaChatService is not inited")
+        break
+      }
+      
+      let answerId = arguments?["answerId"] as! String
+      
+      AdaChatPlugin.adaChatService!.triggerAnswer(answerId: answerId)
+      break
+      
     default:
       if(AdaChatPlugin.adaChatService == nil) {
         print("AdaChatPlugin:default: adaChatService is not inited")

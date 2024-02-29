@@ -13,20 +13,20 @@ public class AdaChatService: NSObject {
   }
   
   func initialize(handle: String,
-            cluster: String? = nil,
-            language: String? = nil,
-            domain: String? = nil,
-            styles: String? = nil,
-            greeting: String? = nil,
-            metafields: [String: Any]? = nil,
-            sensitiveMetafields: [String:Any]? = nil,
-            openWebLinksInSafari: Bool? = nil,
-            appScheme: String? = nil,
-            webViewTimeout: Double? = nil,
-            deviceToken: String? = nil,
-            navigationBarOpaqueBackground: Bool? = nil) {
+                  cluster: String? = nil,
+                  language: String? = nil,
+                  domain: String? = nil,
+                  styles: String? = nil,
+                  greeting: String? = nil,
+                  metafields: [String: Any]? = nil,
+                  sensitiveMetafields: [String:Any]? = nil,
+                  openWebLinksInSafari: Bool? = nil,
+                  appScheme: String? = nil,
+                  webViewTimeout: Double? = nil,
+                  deviceToken: String? = nil,
+                  navigationBarOpaqueBackground: Bool? = nil) {
     debugPrint("AdaChatService:initialize: handle=\(String(describing: handle)), cluster=\(String(describing: cluster)), language=\(String(describing: language)), domain=\(String(describing: domain)), styles=\(String(describing: styles)), greeting=\(String(describing: greeting)), metafields=\(String(describing: metafields)), sensitiveMetafields=\(String(describing: sensitiveMetafields)), openWebLinksInSafari=\(String(describing: openWebLinksInSafari)), appScheme=\(String(describing: appScheme)), webViewTimeout=\(String(describing: webViewTimeout)), deviceToken=\(String(describing: deviceToken)), navigationBarOpaqueBackground=\(String(describing: navigationBarOpaqueBackground))")
-  
+    
     
     let adaFramework = AdaWebHost(handle: handle)
     if cluster != nil {
@@ -115,7 +115,7 @@ public class AdaChatService: NSObject {
     
     //        public var zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)?
     //              zdChatterAuthCallback: (((@escaping (_ token: String) -> Void)) -> Void)? = nil,
-
+    
     self.adaFramework = adaFramework
   }
   
@@ -209,36 +209,33 @@ public class AdaChatService: NSObject {
   }
   
   
-  //
-  //     func loginUser(jwt: String) {
-  //         Zendesk.instance?.loginUser(with: jwt) { result in
-  //             switch result {
-  //             case .success(let user):
-  //                 self.channel?.invokeMethod(ZendeskMessaging.loginSuccess, arguments: ["id": user.id, "externalId": user.externalId])
-  //                 break;
-  //             case .failure(let error):
-  //                 debugPrint("\(self.TAG) - login failure - \(error.localizedDescription)\n")
-  //                 self.channel?.invokeMethod(ZendeskMessaging.loginFailure, arguments: ["error": nil])
-  //                 break;
-  //             }
-  //         }
-  //     }
-  //
-  //     func logoutUser() {
-  //         Zendesk.instance?.logoutUser { result in
-  //             switch result {
-  //             case .success:
-  //                 self.channel?.invokeMethod(ZendeskMessaging.logoutSuccess, arguments: [])
-  //                 break;
-  //             case .failure(let error):
-  //                 debugPrint("\(self.TAG) - logout failure - \(error.localizedDescription)\n")
-  //                 self.channel?.invokeMethod(ZendeskMessaging.logoutFailure, arguments: ["error": nil])
-  //                 break;
-  //             }
-  //         }
-  //     }
-  //     func getUnreadMessageCount() -> Int {
-  //         let count = Zendesk.instance?.messaging?.getUnreadMessageCount()
-  //         return count ?? 0
-  //     }
+  func deleteHistory() {
+    if self.adaFramework == nil {
+      print("AdaChatService:deleteHistory: adaFramework is not initialized")
+    }
+    
+    debugPrint("AdaChatService:deleteHistory")
+    
+    self.adaFramework!.deleteHistory()
+  }
+  
+  func setDeviceToken(deviceToken: String) {
+    if self.adaFramework == nil {
+      print("AdaChatService:setDeviceToken: adaFramework is not initialized")
+    }
+    
+    debugPrint("AdaChatService:setDeviceToken: deviceToken=\(String(describing: deviceToken))")
+    
+    self.adaFramework!.setDeviceToken(deviceToken: deviceToken)
+  }
+  
+  func triggerAnswer(answerId: String) {
+    if self.adaFramework == nil {
+      print("AdaChatService:triggerAnswer: adaFramework is not initialized")
+    }
+    
+    debugPrint("AdaChatService:triggerAnswer: answerId=\(String(describing: answerId))")
+    
+    self.adaFramework!.triggerAnswer(answerId: answerId)
+  }
 }

@@ -61,11 +61,35 @@ class _MyAppState extends State<MyApp> {
                     debugPrint('MyApp: AdaChat.setMetaFields');
 
                     AdaChat.setMetaFields(metafields: {
-                      'key2': 'value2a',
-                      'key3': 'value3',
+                      'key2': 'value2abc',
+                      'key3': '',
                     });
                   },
                   child: const Text("setMetaFields"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    debugPrint('MyApp: AdaChat.setDeviceToken');
+
+                    AdaChat.setDeviceToken(deviceToken: '456243452');
+                  },
+                  child: const Text("setDeviceToken"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    debugPrint('MyApp: AdaChat.deleteHistory');
+
+                    AdaChat.deleteHistory();
+                  },
+                  child: const Text("deleteHistory"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    debugPrint('MyApp: AdaChat.triggerAnswer');
+
+                    AdaChat.triggerAnswer(answerId: '5dade02365851edea546b245');
+                  },
+                  child: const Text("triggerAnswer"),
                 ),
                 ElevatedButton(
                   onPressed: () {
