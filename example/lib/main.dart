@@ -54,7 +54,18 @@ class _MyAppState extends State<MyApp> {
                       // domain: 'domain',
                     );
                   },
-                  child: const Text("Init"),
+                  child: const Text("initialize"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    debugPrint('MyApp: AdaChat.setMetaFields');
+
+                    AdaChat.setMetaFields(metafields: {
+                      'key2': 'value2a',
+                      'key3': 'value3',
+                    });
+                  },
+                  child: const Text("setMetaFields"),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -64,7 +75,7 @@ class _MyAppState extends State<MyApp> {
                         // mode: 'inject',
                         );
                   },
-                  child: const Text("Show chat"),
+                  child: const Text("show"),
                 ),
               ],
             ),
